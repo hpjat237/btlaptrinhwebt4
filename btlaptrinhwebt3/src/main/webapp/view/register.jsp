@@ -4,45 +4,95 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Register</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body {
+        background-color: #f2f2f2;
+    }
+    .container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 50px;
+        max-width: 600px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .alert {
+        margin-bottom: 20px;
+    }
+    .registerbtn {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .registerbtn:hover {
+        background-color: #45a049;
+    }
+    .signin {
+        margin-top: 20px;
+    }
+    .signin a {
+        color: #007bff;
+    }
+    .signin a:hover {
+        text-decoration: underline;
+    }
+</style>
 </head>
 <body>
-	<form action="/maven-sample/register" method="post">
-		<c:if test="${alert != null}">
-			<h3 class="alert alert danger">${alert}</h3>
-		</c:if>
-		<div class="container">
-			<h1>Register</h1>
-			<p>Please fill in this form to create an account.</p>
-			<hr>
+<div class="container">
+    <h1 class="text-center">Register</h1>
+    <p class="text-center">Please fill in this form to create an account.</p>
+    <hr>
+    <form action="/maven-sample/register" method="post">
+        <c:if test="${alert != null}">
+            <div class="alert alert-danger" role="alert">
+                ${alert}
+            </div>
+        </c:if>
+        <div class="form-group">
+            <label for="uname">Username</label>
+            <input type="text" class="form-control" id="uname" name="uname" placeholder="Enter Username" required>
+        </div>
+        <div class="form-group">
+            <label for="fullname">Fullname</label>
+            <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter Fullname" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone" required>
+        </div>
+        <div class="form-group">
+            <label for="psw">Password</label>
+            <input type="password" class="form-control" id="psw" name="psw" placeholder="Enter Password" required>
+        </div>
+        <div class="form-group">
+            <label for="psw-repeat">Repeat Password</label>
+            <input type="password" class="form-control" id="psw-repeat" name="psw-repeat" placeholder="Repeat Password" required>
+        </div>
+        <button type="submit" class="registerbtn">Register</button>
+    </form>
+    <div class="signin text-center">
+        <p>Already have an account? <a href="/maven-sample/login">Sign in</a>.</p>
+    </div>
+</div>
 
-			<label for="uname"><b>Username</b></label> <input type="text"
-				placeholder="Enter Username" name="uname" id="uname" required>
-
-			<label for="fullname"><b>Fullname</b></label> <input type="text"
-				placeholder="Enter Fullname" name="fullname" required> <label
-				for="email"><b>Email</b></label> <input type="text"
-				placeholder="Enter Email" name="email" required> <label
-				for="phone"><b>Phone</b></label> <input type="text"
-				placeholder="Enter Phone" name="phone" required> <label
-				for="psw"><b>Password</b></label> <input type="password"
-				placeholder="Enter Password" name="psw" id="psw" required> <label
-				for="psw-repeat"><b>Repeat Password</b></label> <input
-				type="password" placeholder="Repeat Password" name="psw-repeat"
-				id="psw-repeat" required>
-			<hr>
-
-			<p>
-				By creating an account you agree to our <a href="#">Terms and Privacy</a>.
-			</p>
-			<button type="submit" class="registerbtn">Register</button>
-		</div>
-
-		<div class="container signin">
-			<p>
-				Already have an account? <a href="/btweb/login">Sign in</a>.
-			</p>
-		</div>
-	</form>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

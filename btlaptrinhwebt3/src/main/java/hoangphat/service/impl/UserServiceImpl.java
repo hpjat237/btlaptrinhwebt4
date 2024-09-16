@@ -32,7 +32,7 @@ public class UserServiceImpl implements IUserService{
 			java.sql.Date date=new java.sql.Date(millis);
 			userDao.insert(new UserModel(0, username, email, password, fullname, null, phone, 1, date));
 			return true;
-	}
+	}	
 
 	@Override
 	public void insert(UserModel user) {

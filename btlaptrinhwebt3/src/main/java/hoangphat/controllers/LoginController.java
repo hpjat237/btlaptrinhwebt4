@@ -1,7 +1,9 @@
 package hoangphat.controllers;
 
 import java.io.IOException;
+import java.sql.Date;
 
+import dao.impl.UserDaoImpl;
 import hoangphat.service.IUserService;
 import hoangphat.service.impl.UserServiceImpl;
 import jakarta.servlet.ServletException;
@@ -21,7 +23,7 @@ public class LoginController extends HttpServlet{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	IUserService service = new UserServiceImpl();
+	static IUserService service = new UserServiceImpl();
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -56,11 +58,11 @@ public class LoginController extends HttpServlet{
 		if ("on".equals(remember)) {
 			isRememberMe = true;
 		}
-		if (username.isEmpty() || password.isEmpty()) {
-			alertMsg = "Tài khoản hoặc mật khẩu không được rỗng";
-			req.setAttribute("alert", alertMsg);
-			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
-			return;
+		if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+		    alertMsg = "Tài khoản hoặc mật khẩu không được rỗng";
+		    req.setAttribute("alert", alertMsg);
+		    req.getRequestDispatcher("/view/login.jsp").forward(req, resp);
+		    return;
 		}
 		UserModel user = service.login(username, password);
 		if (user != null) {
@@ -73,7 +75,7 @@ public class LoginController extends HttpServlet{
 		} else {
 			alertMsg = "Tài khoản hoặc mật khẩu không đúng";
 			req.setAttribute("alert", alertMsg);
-			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+			req.getRequestDispatcher("/view/login.jsp").forward(req, resp);
 
 		}
 	}
@@ -83,4 +85,6 @@ public class LoginController extends HttpServlet{
 		cookie.setMaxAge(30 * 60);
 		response.addCookie(cookie);
 	}
+    public static void main(String[] args) {
+    }
 }
