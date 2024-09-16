@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.metadata",
+    "\\.settings",
+    "\\src",
+    "\\src\\main",
+    "\\src\\main\\java",
+    "\\src\\main\\java\\hoangphat",
+    "\\src\\main\\java\\hoangphat\\controllers",
+    "\\src\\main\\webapp",
+    "\\src\\main\\webapp\\view"
+  ],
+  "PreviewInSolutionExplorer": false
+}
