@@ -1,6 +1,6 @@
 package hoangphat.service;
 
-import models.UserModel;
+import hoangphat.models.UserModel;
 
 public interface IUserService {
 

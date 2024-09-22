@@ -1,11 +1,6 @@
 package hoangphat.controllers;
 
 import java.io.IOException;
-import java.sql.Date;
-
-import dao.impl.UserDaoImpl;
-import hoangphat.service.IUserService;
-import hoangphat.service.impl.UserServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -13,18 +8,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import models.UserModel;
-import ultis.Constant;
+import hoangphat.models.UserModel;
+import hoangphat.service.IUserService;
+import hoangphat.service.impl.UserServiceImpl;
+import hoangphat.ultis.Constant;
 
-@WebServlet("/login")
-public class LoginController extends HttpServlet{
+@WebServlet(urlPatterns = {"/login","/dangnhap"})
+public class LoginController extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	static IUserService service = new UserServiceImpl();
+	IUserService service = new UserServiceImpl();
 
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		/*
@@ -39,7 +34,8 @@ public class LoginController extends HttpServlet{
 		 */
 		req.getRequestDispatcher("/view/login.jsp").forward(req, resp);
 	}
-
+	
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		// mã hóa UTF-8
@@ -48,9 +44,9 @@ public class LoginController extends HttpServlet{
 		resp.setContentType("text/html");
 
 		// lấy tham số từ view
-		String username = req.getParameter("username");
-		String password = req.getParameter("password");
-		String remember = req.getParameter("rememberme");
+		String username = req.getParameter("uname");
+		String password = req.getParameter("psw");
+		String remember = req.getParameter("remember");
 
 		// Xử lý bài toán
 		String alertMsg = "";
@@ -58,12 +54,15 @@ public class LoginController extends HttpServlet{
 		if ("on".equals(remember)) {
 			isRememberMe = true;
 		}
-		if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
-		    alertMsg = "Tài khoản hoặc mật khẩu không được rỗng";
-		    req.setAttribute("alert", alertMsg);
-		    req.getRequestDispatcher("/view/login.jsp").forward(req, resp);
-		    return;
-		}
+		System.out.println(username);
+		System.out.println(password);
+
+	    if (username.isEmpty() || password.isEmpty()) {
+			alertMsg = "Tài khoản hoặc mật khẩu không được rỗng";
+			req.setAttribute("alert", alertMsg);
+			req.getRequestDispatcher("/view/login.jsp").forward(req, resp);
+			return;
+		}           
 		UserModel user = service.login(username, password);
 		if (user != null) {
 			HttpSession session = req.getSession(true);
@@ -85,6 +84,4 @@ public class LoginController extends HttpServlet{
 		cookie.setMaxAge(30 * 60);
 		response.addCookie(cookie);
 	}
-    public static void main(String[] args) {
-    }
 }
